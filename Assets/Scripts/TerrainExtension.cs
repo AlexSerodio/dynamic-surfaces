@@ -81,7 +81,6 @@ public class TerrainExtension {
                 }
             }
             terrain.terrainData.SetHeights(0, 0, heights);
-            //yield return new WaitForSeconds(.5f);
             yield return null;
         }
     }
