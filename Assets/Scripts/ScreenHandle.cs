@@ -3,7 +3,14 @@
 public class ScreenHandle : MonoBehaviour {
 
     [SerializeField] private Terrain terrain;
-    
+    private float[,] _heights;
+
+
+    void Start()
+    {
+            
+    }
+
     public void LoadHeightMapButton() {
         TerrainExtension.LoadTerrain("/Heightmaps/heightmap.raw", terrain.terrainData);
     }

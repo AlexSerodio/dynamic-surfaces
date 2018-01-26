@@ -8,21 +8,21 @@ public class TerrainExtension {
 
     public static bool active = false;
 
-    private static float[,] heights;
-    private static int xRes;
-    private static int yRes;
+    //private static float[,] heights;
+    private static int _resolutionX;
+    private static int _resolutionZ;
 
     private TerrainExtension() { }
     
-    private static void GetTerrainConfigurations(Terrain terrain) {
+    private static float[,] GetTerrainResolution(Terrain terrain) {
         //get the terrain heightmap width and height.
         //it will be used to determinate the terrain/array size
-        xRes = terrain.terrainData.heightmapWidth;
-        yRes = terrain.terrainData.heightmapHeight;
+        _resolutionX = terrain.terrainData.heightmapWidth;
+        _resolutionZ = terrain.terrainData.heightmapHeight;
 
         //GetHeights - gets the heightmap points of the terrain. 
         //Store those values in a float array.
-        heights = terrain.terrainData.GetHeights(0, 0, xRes, yRes);
+        return terrain.terrainData.GetHeights(0, 0, _resolutionX, _resolutionZ);
     }
 
     public static void LoadTerrain(string fileName, TerrainData terrainData) {
@@ -50,38 +50,44 @@ public class TerrainExtension {
     }
 
     public static void ResetHeight(Terrain terrain) {
-        GetTerrainConfigurations(terrain);
-        for (int y = 0; y < yRes; y++)
-            for (int x= 0; x < xRes; x++)
-                heights[y, x] = 0;
-
+        float[,] heights = GetTerrainResolution(terrain);
+        for (int x = 0; x < _resolutionX; x++) {
+            for (int z = 0; z < _resolutionZ; z++)
+                heights[x, z] = .5f;
+        }
         terrain.terrainData.SetHeights(0, 0, heights);
     }
 
     public static void RandomHeight(Terrain terrain, float height) {
-        GetTerrainConfigurations(terrain);
+        float[,] heights = GetTerrainResolution(terrain);
         //manipulate the height data.
-        for (int y = 0; y < yRes; y++)
-            for (int x = 0; x < xRes; x++)
-                heights[y, x] = Random.Range(0, height);
-
+        for (int x = 0; x < _resolutionX; x++) {
+            for (int z = 0; z < _resolutionZ; z++)
+                heights[x, z] = Random.Range(0, height);
+        }
         //SetHeights - change the terrain heights.
         terrain.terrainData.SetHeights(0, 0, heights);
     }
 
     public static IEnumerator ChangeHeight(Terrain terrain) {
+        float step = 1/(float)_resolutionX;
+        float[,] heights = GetTerrainResolution(terrain);
         while (active) {
-            GetTerrainConfigurations(terrain);
-            for (int y = 0; y < yRes; y++) {
-                for (int x = 0; x < xRes; x++) {
-                    if (heights[y, x] > 0) {
-                        heights[y, x] += Random.Range(-.001f, .001f);
-                        //TODO - suavização das posições vizinhas (rascunho no caderno)
-                    }
-                }
+            for (int x = 0; x < _resolutionX; x++) {
+                for (int z = 0; z < _resolutionZ; z++)
+                    heights[x,z] = Sine(x*step);
             }
             terrain.terrainData.SetHeights(0, 0, heights);
             yield return null;
         }
+    }
+
+    private static float Sine (float x) {
+        //return Mathf.Sin(Mathf.PI * (x + Time.time);
+
+        /*the expression bellow do the same as above but it keeps the range between 0 and 1 
+        instead of -1 and 1. As the terrain height needs to be a value between 0 and 1 the sine value
+        can't be negative.*/
+        return (Mathf.Sin(Mathf.PI * (x + Time.time)) + 1) / 2f;
     }
 }
