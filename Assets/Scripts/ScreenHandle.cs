@@ -1,15 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScreenHandle : MonoBehaviour {
 
     [SerializeField] private Terrain terrain;
     private float[,] _heights;
-
-
-    void Start()
-    {
-            
-    }
 
     public void LoadHeightMapButton() {
         TerrainExtension.LoadTerrain("/Heightmaps/heightmap.raw", terrain.terrainData);
@@ -26,6 +21,14 @@ public class ScreenHandle : MonoBehaviour {
     public void ChangeHeightButton() {
         TerrainExtension.active = !TerrainExtension.active;
         StartCoroutine(TerrainExtension.ChangeHeight(terrain));
+    }
+
+    public void LoadScene(string name) {
+        SceneManager.LoadScene(name);
+    }
+
+    public void QuitGame() {
+        Application.Quit();
     }
 
 }
