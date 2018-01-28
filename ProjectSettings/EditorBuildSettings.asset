@@ -12,5 +12,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Terrain 1.unity
     guid: 9db6eccc343a02f4b943a26a27522fb5
   - enabled: 1
+    path: Assets/Scenes/Terrain 2.unity
+    guid: 09f9a4a08812299438e69c986a58f52f
+  - enabled: 1
     path: Assets/Scenes/Mesh.unity
     guid: 1dfba38cc0e6b734d93836d76800e659

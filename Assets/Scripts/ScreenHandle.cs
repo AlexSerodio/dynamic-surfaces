@@ -23,6 +23,8 @@ public class ScreenHandle : MonoBehaviour {
         StartCoroutine(TerrainExtension.ChangeHeight(terrain));
     }
 
+    //----------------------------------------------------------
+
     public void LoadScene(string name) {
         SceneManager.LoadScene(name);
     }
