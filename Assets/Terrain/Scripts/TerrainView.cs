@@ -1,22 +1,18 @@
-﻿using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class ScreenHandle : MonoBehaviour {
+public class TerrainView : MonoBehaviour {
 
-    public TerrainCreator terrainCreator;
-    private float[,] _heights;
+	public TerrainCreator terrainCreator;
     private bool _terrainMapButton;
     private Coroutine _terrainMapCoroutine;
 
-    public void LoadScene(int index) {
-        SceneManager.LoadScene(index);
+	public void LoadScene(int index) {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(index);
     }
 
-    public void QuitGame() {
-        Application.Quit();
-    }
-
-    public void ActivateTerrainMap() {
+	 public void ActivateTerrainMap() {
         _terrainMapButton = !_terrainMapButton;
 
         if(_terrainMapButton) {
@@ -26,5 +22,4 @@ public class ScreenHandle : MonoBehaviour {
             terrainCreator.ResetColor();
         }
     }
-
 }

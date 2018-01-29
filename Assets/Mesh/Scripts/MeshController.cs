@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
-public class MeshCreator : MonoBehaviour {
+public class MeshController : MonoBehaviour {
 
 	public int resolution;
 	public int width;
 	public int length;
 	public float height;
+	public Gradient heatmap;
 
 	private Mesh _mesh;
 	private Vector3[] _vertices;
@@ -22,6 +23,7 @@ public class MeshCreator : MonoBehaviour {
 			GetComponent<MeshFilter>().mesh = _mesh;
 		}
 		CreateGrid();
+		ResetColor();
 	}
 
 	void Update() {
@@ -38,13 +40,11 @@ public class MeshCreator : MonoBehaviour {
 		for (int v = 0, z = 0; z <= resolution; z++) {
 			for (int x = 0; x <= resolution; x++, v++) {
 				_vertices[v] = new Vector3(x * stepSize - 0.5f, 0f, z * stepSize - 0.5f);
-				_colors[v] = Color.black;
 				_normals[v] = Vector3.up;
 				uv[v] = new Vector2(x * stepSize, z * stepSize);
 			}
 		}
 		_mesh.vertices = _vertices;
-		_mesh.colors = _colors;
 		_mesh.normals = _normals;
 		_mesh.uv = uv;
 
@@ -70,11 +70,35 @@ public class MeshCreator : MonoBehaviour {
         for (int v = 0, y = 0; y <= resolution; y++) {
 			for (int x = 0; x <= resolution; x++, v++) {
                 _vertices[v].y = Sine(x * step);
+				// _colors[v] = heatmap.Evaluate(_vertices[v].y + 0.5f);
 			}
         }
 		_mesh.vertices = _vertices;
+		// _mesh.colors = _colors;
 		_mesh.RecalculateNormals();
     }
+
+	public IEnumerator UpdateHeatMap() {
+		while (true) {
+			for (int v = 0, y = 0; y <= resolution; y++) {
+				for (int x = 0; x <= resolution; x++, v++) {
+					_colors[v] = heatmap.Evaluate(_vertices[v].y + .5f);
+				}
+			}
+			_mesh.colors = _colors;
+
+			yield return null;
+		}
+	}
+
+	public void ResetColor() {
+		for (int v = 0, y = 0; y <= resolution; y++) {
+			for (int x = 0; x <= resolution; x++, v++) {
+				_colors[v] = Color.green;
+			}
+		}
+		_mesh.colors = _colors;
+	}
 
 	private static float Sine (float x) {
         return Mathf.Sin(Mathf.PI * (x + Time.time));
