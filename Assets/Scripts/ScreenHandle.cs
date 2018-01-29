@@ -3,34 +3,28 @@ using UnityEngine.SceneManagement;
 
 public class ScreenHandle : MonoBehaviour {
 
-    [SerializeField] private Terrain terrain;
+    public TerrainCreator terrainCreator;
     private float[,] _heights;
+    private bool _terrainMapButton;
+    private Coroutine _terrainMapCoroutine;
 
-    public void LoadHeightMapButton() {
-        TerrainExtension.LoadTerrain("/Heightmaps/heightmap.raw", terrain.terrainData);
-    }
-
-    public void RandomHeightButton() {
-        TerrainExtension.RandomHeight(terrain, .01f);
-    }
-
-    public void ResetHeightButton() {
-        TerrainExtension.ResetHeight(terrain);
-    }
-
-    public void ChangeHeightButton() {
-        TerrainExtension.active = !TerrainExtension.active;
-        StartCoroutine(TerrainExtension.ChangeHeight(terrain));
-    }
-
-    //----------------------------------------------------------
-
-    public void LoadScene(string name) {
-        SceneManager.LoadScene(name);
+    public void LoadScene(int index) {
+        SceneManager.LoadScene(index);
     }
 
     public void QuitGame() {
         Application.Quit();
+    }
+
+    public void ActivateTerrainMap() {
+        _terrainMapButton = !_terrainMapButton;
+
+        if(_terrainMapButton) {
+            _terrainMapCoroutine = StartCoroutine(terrainCreator.UpdateHeatMap());
+        } else {
+            StopCoroutine(_terrainMapCoroutine);
+            terrainCreator.ResetColor();
+        }
     }
 
 }

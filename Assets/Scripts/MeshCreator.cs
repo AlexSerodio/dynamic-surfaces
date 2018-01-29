@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
-public class SurfaceCreator : MonoBehaviour {
+public class MeshCreator : MonoBehaviour {
 
-	private int resolution = 255;
-	private int width = 10;
-	private int length = 10;
-	private int height = 3;
+	public int resolution;
+	public int width;
+	public int length;
+	public float height;
 
 	private Mesh _mesh;
 	private Vector3[] _vertices;
@@ -24,9 +24,6 @@ public class SurfaceCreator : MonoBehaviour {
 		CreateGrid();
 	}
 
-	/// <summary>
-	/// Update is called every frame, if the MonoBehaviour is enabled.
-	/// </summary>
 	void Update() {
 		ChangeHeight();
 	}
@@ -65,7 +62,7 @@ public class SurfaceCreator : MonoBehaviour {
 		_mesh.triangles = triangles;
 
 		transform.localScale = new Vector3(width, height, length);
-		transform.localPosition = new Vector3(0, height/2f, 0);
+		transform.localPosition = new Vector3(0, height/2f, 4.65f);
 	}
 
 	public void ChangeHeight() {
