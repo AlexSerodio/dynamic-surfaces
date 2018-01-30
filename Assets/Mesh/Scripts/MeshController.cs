@@ -9,6 +9,8 @@ public class MeshController : MonoBehaviour {
 	public int width;
 	public int length;
 	public float height;
+	public FunctionOption function;
+	public bool recalculateNormals = true;
 	public Gradient heatmap;
 
 	private Mesh _mesh;
@@ -62,20 +64,23 @@ public class MeshController : MonoBehaviour {
 		_mesh.triangles = triangles;
 
 		transform.localScale = new Vector3(width, height, length);
-		transform.localPosition = new Vector3(0, height/2f, 4.65f);
+		transform.localPosition = new Vector3(0, 0, 4.65f);
 	}
 
 	public void ChangeHeight() {
         float step = 1/(float)resolution;
         for (int v = 0, y = 0; y <= resolution; y++) {
 			for (int x = 0; x <= resolution; x++, v++) {
-                _vertices[v].y = Sine(x * step);
-				// _colors[v] = heatmap.Evaluate(_vertices[v].y + 0.5f);
+				if(function == 0)
+                	_vertices[v].y = MathFunctions.Sine(x * step);
+				else
+					_vertices[v].y = .25f + MathFunctions.Sine(x*step, y*step);
 			}
         }
 		_mesh.vertices = _vertices;
 		// _mesh.colors = _colors;
-		_mesh.RecalculateNormals();
+		if(recalculateNormals)
+			_mesh.RecalculateNormals();
     }
 
 	public IEnumerator UpdateHeatMap() {
@@ -99,9 +104,5 @@ public class MeshController : MonoBehaviour {
 		}
 		_mesh.colors = _colors;
 	}
-
-	private static float Sine (float x) {
-        return Mathf.Sin(Mathf.PI * (x + Time.time));
-    }
 
 }

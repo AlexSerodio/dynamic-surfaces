@@ -200,6 +200,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1053683468}
+  - {fileID: 1900916836}
   - {fileID: 1214023942}
   - {fileID: 564940149}
   - {fileID: 1323368316}
@@ -222,7 +223,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3daec6c51663b5c4d8e39f86e314192e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terrainCreator: {fileID: 0}
 --- !u!1 &564940148
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,11 +253,11 @@ RectTransform:
   m_Children:
   - {fileID: 1835233438}
   m_Father: {fileID: 16039289}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -418, y: 195.32}
+  m_AnchoredPosition: {x: -418, y: -91.72052}
   m_SizeDelta: {x: 493.9, y: 162.84}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &564940150
@@ -454,7 +454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5808823, g: 0.5808823, b: 0.5808823, a: 1}
+  m_Color: {r: 0.5808823, g: 0.5808823, b: 0.5808823, a: 0.553}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -586,11 +586,11 @@ RectTransform:
   m_Children:
   - {fileID: 1835441866}
   m_Father: {fileID: 16039289}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 449.7, y: 194.67}
+  m_AnchoredPosition: {x: 449.7, y: -92.37052}
   m_SizeDelta: {x: 478.7, y: 164.14}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1214023943
@@ -708,7 +708,7 @@ RectTransform:
   m_Children:
   - {fileID: 2118433025}
   m_Father: {fileID: 16039289}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -948,6 +948,85 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1835441865}
+--- !u!1 &1900916835
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1900916836}
+  - component: {fileID: 1900916838}
+  - component: {fileID: 1900916837}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1900916836
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1900916835}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 16039289}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -212.22606}
+  m_SizeDelta: {x: 0, y: 424.5}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1900916837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1900916835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 50
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "Teste de performance utilizando dois componentes que simulam superf\xEDcies:
+    Terrain Component e Mesh Component. Ambos possuem a mesma resolu\xE7\xE3o, largura,
+    comprimento e altura e s\xE3o submetidos \xE0s mesmas fun\xE7\xF5es. A \xFAnica
+    diferen\xE7a \xE9 que o Mesh Component utiliza cores s\xF3lidas para representar
+    o mapa hipsom\xE9trico enquanto que o Terrain Component utiliza texturas (imagens)
+    pois a altera\xE7\xE3o de seu material \xE9 poss\xEDvel apenas atrav\xE9s de texturas"
+--- !u!222 &1900916838
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1900916835}
 --- !u!1 &2118433024
 GameObject:
   m_ObjectHideFlags: 0

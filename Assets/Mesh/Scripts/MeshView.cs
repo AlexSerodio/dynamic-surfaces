@@ -3,6 +3,7 @@
 public class MeshView : MonoBehaviour {
 
 	public MeshController meshCreator;
+    public GameObject containerPanel;
 	private bool _meshMapButton;
 	private Coroutine _meshMapCoroutine;
 
@@ -21,4 +22,22 @@ public class MeshView : MonoBehaviour {
         }
     }
 
+    public void ActivateSineFunction() {
+        meshCreator.function = FunctionOption.Sine;
+    }
+
+    public void ActivateComplexSineFunction() {
+        meshCreator.function = FunctionOption.ComplexSine;
+    }
+
+    public void HideButton() {
+        if(containerPanel.activeSelf)
+            containerPanel.SetActive(false);
+        else
+            containerPanel.SetActive(true);
+    }
+
+    public void ActivateNormalsRecalculation() {
+        meshCreator.recalculateNormals = !meshCreator.recalculateNormals;
+    }
 }

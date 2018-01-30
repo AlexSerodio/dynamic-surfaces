@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class TerrainCreator : MonoBehaviour {
 
+    public FunctionOption function;
+
 	private Terrain _terrain;
 	private static int _resolutionX;
     private static int _resolutionZ;
@@ -36,26 +38,21 @@ public class TerrainCreator : MonoBehaviour {
         _terrain.terrainData.SetHeights(0, 0, _heights);
     }
 
-    private IEnumerator ChangeHeight() {
+    public IEnumerator ChangeHeight() {
         float step = 1/(float)_resolutionX;
 
         while (true) {
             for (int x = 0; x < _resolutionX; x++) {
-                for (int z = 0; z < _resolutionZ; z++)
-                    _heights[x,z] = Sine(x*step);
+                for (int z = 0; z < _resolutionZ; z++) {
+                    if(function == 0)
+                        _heights[x,z] = MathFunctions.Sine(x*step);
+                    else
+                        _heights[x,z] = 0.5f + MathFunctions.Sine(x*step, z*step);
+                }
             }
             _terrain.terrainData.SetHeights(0, 0, _heights);
             yield return null;
         }
-    }
-
-    private static float Sine (float x) {
-        //return Mathf.Sin(Mathf.PI * (x + Time.time);
-
-        /*the expression bellow do the same as above but it keeps the range between 0 and 1 
-        instead of -1 and 1. As the terrain height needs to be a value between 0 and 1 the sine value
-        can't be negative.*/
-        return (Mathf.Sin(Mathf.PI * (x + Time.time)) + 1) / 2f;
     }
 
     public IEnumerator UpdateHeatMap() {
@@ -63,8 +60,8 @@ public class TerrainCreator : MonoBehaviour {
         while(true) {
             for (int x = 0; x < _resolutionX-1; x++) {
                 for (int y = 0; y < _resolutionZ-1; y++) {
-                    alphaMap[x, y, 1] = 1.0f - _heights[x, y];
-                    alphaMap[x, y, 2] = _heights[x, y];
+                    alphaMap[x, y, 0] = 1.0f - _heights[x, y];
+                    alphaMap[x, y, 1] = _heights[x, y];
                 }
             }
             _terrain.terrainData.SetAlphamaps(0, 0, alphaMap); 
@@ -79,7 +76,6 @@ public class TerrainCreator : MonoBehaviour {
             for (int y = 0; y < _heights.GetLength(1)-1; y++) {
                 alphaMap[x, y, 0] = 1;
                 alphaMap[x, y, 1] = 0;
-                alphaMap[x, y, 2] = 0;
             }
         }
         _terrain.terrainData.SetAlphamaps(0, 0, alphaMap);
