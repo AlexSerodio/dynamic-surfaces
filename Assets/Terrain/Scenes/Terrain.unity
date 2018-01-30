@@ -559,7 +559,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Esconder
+  m_Text: Esconder menu
 --- !u!222 &469864269
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -600,8 +600,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -50, y: 0}
-  m_SizeDelta: {x: 75.6, y: 49.399994}
+  m_AnchoredPosition: {x: -60, y: 0}
+  m_SizeDelta: {x: 110, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &623865713
 MonoBehaviour:
@@ -2010,7 +2010,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 4294967294
   m_IsActive: 1
 --- !u!154 &2137987429
 TerrainCollider:
@@ -2043,7 +2043,7 @@ Terrain:
   m_CastShadows: 1
   m_DrawHeightmap: 1
   m_DrawTreesAndFoliage: 1
-  m_ReflectionProbeUsage: 1
+  m_ReflectionProbeUsage: 3
   m_MaterialType: 0
   m_LegacySpecular:
     serializedVersion: 2

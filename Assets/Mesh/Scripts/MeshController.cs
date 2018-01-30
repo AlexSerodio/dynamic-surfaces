@@ -105,4 +105,14 @@ public class MeshController : MonoBehaviour {
 		_mesh.colors = _colors;
 	}
 
+	public void ResetNormals() {
+		Vector3 zero = Vector3.up;
+		for (int v = 0, z = 0; z <= resolution; z++) {
+			for (int x = 0; x <= resolution; x++, v++) {
+				_normals[v] = zero;
+			}
+		}
+		_mesh.normals = _normals;
+	}
+
 }

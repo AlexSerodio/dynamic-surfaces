@@ -39,5 +39,6 @@ public class MeshView : MonoBehaviour {
 
     public void ActivateNormalsRecalculation() {
         meshCreator.recalculateNormals = !meshCreator.recalculateNormals;
+        meshCreator.ResetNormals();
     }
 }
