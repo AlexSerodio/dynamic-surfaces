@@ -180,7 +180,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Teste de performance usando Mesh Component.
+  m_Text: Performance test using Mesh Component.
 --- !u!222 &312949187
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -593,7 +593,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Esconder menu
+  m_Text: Hide/Show menu
 --- !u!222 &699541018
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1239,7 +1239,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Fun\xE7\xF5es"
+  m_Text: Functions
 --- !u!222 &1023982971
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1435,7 +1435,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Senoide 2
+  m_Text: Sine wave 2
 --- !u!222 &1122391158
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1613,7 +1613,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: FPS
 --- !u!222 &1332127447
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1827,9 +1827,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Normals
-
-    (reflexo)'
+  m_Text: On/Off normals
 --- !u!222 &1650556319
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2026,7 +2024,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Mapa Hipsom\xE9trico"
+  m_Text: Hypsometric Map
 --- !u!222 &1724331166
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2100,7 +2098,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Senoide 1
+  m_Text: Sine wave 1
 --- !u!222 &1733487026
 CanvasRenderer:
   m_ObjectHideFlags: 0

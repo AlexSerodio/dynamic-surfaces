@@ -559,7 +559,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Esconder menu
+  m_Text: Hide/Show menu
 --- !u!222 &469864269
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -900,7 +900,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Senoide 2
+  m_Text: Sine wave 2
 --- !u!222 &718199932
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -974,7 +974,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Teste de performance usando Terrain Component.
+  m_Text: Performance test using Terrain Component.
 --- !u!222 &752456064
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1259,7 +1259,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Senoide 1
+  m_Text: Sine wave 1
 --- !u!222 &1154605765
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1502,7 +1502,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: FPS
 --- !u!222 &1237494771
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1717,7 +1717,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Fun\xE7\xF5es"
+  m_Text: Functions
 --- !u!222 &1928651036
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1913,7 +1913,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Mapa Hipsom\xE9trico"
+  m_Text: Hypsometric Map
 --- !u!222 &2105590623
 CanvasRenderer:
   m_ObjectHideFlags: 0

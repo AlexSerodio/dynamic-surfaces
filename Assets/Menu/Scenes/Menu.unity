@@ -847,7 +847,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -921,7 +921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -980,8 +980,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -212.22606}
-  m_SizeDelta: {x: 0, y: 424.5}
+  m_AnchoredPosition: {x: 0, y: -238.6}
+  m_SizeDelta: {x: 0, y: 477.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1900916837
 MonoBehaviour:
@@ -1015,12 +1015,13 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Teste de performance utilizando dois componentes que simulam superf\xEDcies:
-    Terrain Component e Mesh Component. Ambos possuem a mesma resolu\xE7\xE3o, largura,
-    comprimento e altura e s\xE3o submetidos \xE0s mesmas fun\xE7\xF5es. A \xFAnica
-    diferen\xE7a \xE9 que o Mesh Component utiliza cores s\xF3lidas para representar
-    o mapa hipsom\xE9trico enquanto que o Terrain Component utiliza texturas (imagens)
-    pois a altera\xE7\xE3o de seu material \xE9 poss\xEDvel apenas atrav\xE9s de texturas"
+  m_Text: 'Performance test using two different surface components: Terrain and Mesh
+    Component. Both have the same resolution, width, length and height and are submitted
+    to the same functions. The only differences is how to access the surfaces height
+    values (since Terrain uses a two-dimensional array to store the height values
+    whereas Mesh uses a simple one-dimensional array) and how to update their colors
+    (since Mesh Component can work with solid colors whereas Terrain seems to work
+    only with alphamaps).'
 --- !u!222 &1900916838
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1074,7 +1075,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1094,7 +1095,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Sair
+  m_Text: Exit
 --- !u!222 &2118433027
 CanvasRenderer:
   m_ObjectHideFlags: 0
