@@ -11,6 +11,8 @@ public class MeshController : MonoBehaviour {
 	public float height;
 	public FunctionOption function;
 	public bool recalculateNormals = true;
+	public Material mainMaterial;
+	public Material heatmapMaterial;
 	public Gradient heatmap;
 
 	private Mesh _mesh;
@@ -25,7 +27,8 @@ public class MeshController : MonoBehaviour {
 			GetComponent<MeshFilter>().mesh = _mesh;
 		}
 		CreateGrid();
-		ResetColor();
+		// ResetColor();
+		ApplyMaterial(mainMaterial);
 	}
 
 	void Update() {
@@ -84,6 +87,7 @@ public class MeshController : MonoBehaviour {
     }
 
 	public IEnumerator UpdateHeatMap() {
+		ApplyMaterial(heatmapMaterial);
 		while (true) {
 			for (int v = 0, y = 0; y <= resolution; y++) {
 				for (int x = 0; x <= resolution; x++, v++) {
@@ -94,6 +98,10 @@ public class MeshController : MonoBehaviour {
 
 			yield return null;
 		}
+	}
+
+	public void ApplyMaterial(Material material) {
+		GetComponent<MeshRenderer>().material = material;
 	}
 
 	public void ResetColor() {

@@ -635,6 +635,8 @@ MonoBehaviour:
   height: 5
   function: 0
   recalculateNormals: 1
+  mainMaterial: {fileID: 2100000, guid: a13750bb470877e4184c7e7cdd3b7c3b, type: 2}
+  heatmapMaterial: {fileID: 2100000, guid: 2f3e04da3e1d40043bb3e6d9cf06f4b0, type: 2}
   heatmap:
     serializedVersion: 2
     key0: {r: 0, g: 1, b: 0, a: 1}
@@ -1865,7 +1867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e5768181694e954db41a6872a5ca8e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshCreator: {fileID: 699585791}
+  meshController: {fileID: 699585791}
   containerPanel: {fileID: 1747471800}
 --- !u!114 &1712574458
 MonoBehaviour:
