@@ -2,7 +2,7 @@
 
 public class MeshView : MonoBehaviour {
 
-	public MeshController meshController;
+	public MeshController meshCreator;
     public GameObject containerPanel;
 	private bool _meshMapButton;
 	private Coroutine _meshMapCoroutine;
@@ -15,20 +15,20 @@ public class MeshView : MonoBehaviour {
         _meshMapButton = !_meshMapButton;
 
         if(_meshMapButton) {
-            _meshMapCoroutine = StartCoroutine(meshController.UpdateHeatMap());
+            _meshMapCoroutine = StartCoroutine(meshCreator.UpdateHeatMap());
         } else {
             StopCoroutine(_meshMapCoroutine);
             // meshCreator.ResetColor();
-            meshController.ApplyMaterial(meshController.mainMaterial);
+            meshCreator.SetMaterial(meshCreator.dirt);
         }
     }
 
     public void ActivateSineFunction() {
-        meshController.function = FunctionOption.Sine;
+        meshCreator.function = FunctionOption.Sine;
     }
 
     public void ActivateComplexSineFunction() {
-        meshController.function = FunctionOption.ComplexSine;
+        meshCreator.function = FunctionOption.ComplexSine;
     }
 
     public void HideButton() {
@@ -39,7 +39,7 @@ public class MeshView : MonoBehaviour {
     }
 
     public void ActivateNormalsRecalculation() {
-        meshController.recalculateNormals = !meshController.recalculateNormals;
-        meshController.ResetNormals();
+        meshCreator.recalculateNormals = !meshCreator.recalculateNormals;
+        meshCreator.ResetNormals();
     }
 }

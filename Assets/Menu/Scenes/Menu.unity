@@ -1016,7 +1016,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Performance test using two different surface components: Terrain and Mesh
-    Component. Both have the same resolution, width, length, height and are submitted
+    Component. Both have the same resolution, width, length and height and are submitted
     to the same functions. The only differences is how to access the surfaces height
     values (since Terrain uses a two-dimensional array to store the height values
     whereas Mesh uses a simple one-dimensional array) and how to update their colors

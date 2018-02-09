@@ -20,6 +20,7 @@ public class TerrainCreator : MonoBehaviour {
 
         ResetHeight();
         ResetColor();
+
         StartCoroutine(ChangeHeight());
 	}
 
@@ -55,18 +56,16 @@ public class TerrainCreator : MonoBehaviour {
     }
 
     public IEnumerator UpdateHeatMap() {
+        HideDirt();
         float[, ,] alphaMap = _terrain.terrainData.GetAlphamaps(0, 0, _terrain.terrainData.alphamapWidth, _terrain.terrainData.alphamapHeight);
         while(true) {
             for (int x = 0; x < _resolutionX-1; x++) {
                 for (int y = 0; y < _resolutionZ-1; y++) {
                     alphaMap[x, y, 0] = 1.0f - _heights[x, y];
                     alphaMap[x, y, 1] = _heights[x, y];
-                    alphaMap[x, y, 2] = 0;
                 }
             }
-            _terrain.terrainData.SetAlphamaps(0, 0, alphaMap);
-            // GetComponent<Terrain>().materialType = Terrain.MaterialType.Custom; 
-            // GetComponent<Terrain>().materialTemplate.color = Color.green;
+            _terrain.terrainData.SetAlphamaps(0, 0, alphaMap); 
             yield return null;
         }
     }
@@ -76,9 +75,20 @@ public class TerrainCreator : MonoBehaviour {
         
         for (int x = 0; x < _heights.GetLength(0)-1; x++) {
             for (int y = 0; y < _heights.GetLength(1)-1; y++) {
-                alphaMap[x, y, 2] = 1;
-                alphaMap[x, y, 1] = 0;
                 alphaMap[x, y, 0] = 0;
+                alphaMap[x, y, 1] = 0;
+                alphaMap[x, y, 2] = 1;
+            }
+        }
+        _terrain.terrainData.SetAlphamaps(0, 0, alphaMap);
+    }
+
+    private void HideDirt () {
+        float[, ,] alphaMap = _terrain.terrainData.GetAlphamaps(0, 0, _terrain.terrainData.alphamapWidth, _terrain.terrainData.alphamapHeight);
+        
+        for (int x = 0; x < _heights.GetLength(0)-1; x++) {
+            for (int y = 0; y < _heights.GetLength(1)-1; y++) {
+                alphaMap[x, y, 2] = 0;
             }
         }
         _terrain.terrainData.SetAlphamaps(0, 0, alphaMap);
