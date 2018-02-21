@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TerrainUtilsDLL;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
@@ -19,8 +20,11 @@ public class MeshController : MonoBehaviour {
 	private Vector3[] _vertices;
 	private Vector3[] _normals;
 	private Color[] _colors;
-	
+	private MeshHeight _utils;
+
 	void Start () {
+		_utils = new MeshHeight();
+		
 		if (_mesh == null) {
 			_mesh = new Mesh();
 			_mesh.name = "Surface Mesh";
@@ -32,7 +36,11 @@ public class MeshController : MonoBehaviour {
 	}
 
 	void Update() {
-		ChangeHeight();
+		// ChangeHeight();
+		
+		_mesh.vertices = _utils.ChangeHeight(_vertices, resolution, (int)function);
+		if(recalculateNormals)
+			_mesh.RecalculateNormals();
 	}
 
 	public void SetMaterial (Material newMaterial) {
@@ -74,6 +82,7 @@ public class MeshController : MonoBehaviour {
 		transform.localPosition = new Vector3(0, 0, 4.65f);
 	}
 
+	/*
 	public void ChangeHeight() {
         float step = 1/(float)resolution;
         for (int v = 0, y = 0; y <= resolution; y++) {
@@ -85,10 +94,10 @@ public class MeshController : MonoBehaviour {
 			}
         }
 		_mesh.vertices = _vertices;
-		// _mesh.colors = _colors;
 		if(recalculateNormals)
 			_mesh.RecalculateNormals();
     }
+	*/
 
 	public IEnumerator UpdateHeatMap() {
 		SetMaterial(heatmapMaterial);
@@ -103,6 +112,17 @@ public class MeshController : MonoBehaviour {
 			yield return null;
 		}
 	}
+	
+
+	/*
+	public IEnumerator UpdateHeatMap() {
+		SetMaterial(heatmapMaterial);
+		while (true) {
+			_mesh.colors = _utils.UpdateHeatMap(_vertices, resolution, heatmap);
+			yield return null;
+		}
+	}
+	*/
 
 	public void ResetColor() {
 		for (int v = 0, y = 0; y <= resolution; y++) {

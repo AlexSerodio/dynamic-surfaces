@@ -629,7 +629,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74d48fb2650c2e54db6680a6836d3386, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resolution: 255
+  resolution: 15
   width: 10
   length: 10
   height: 5

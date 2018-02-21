@@ -1,7 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using TerrainUtilsDLL;
 
 public class TerrainCreator : MonoBehaviour {
 
@@ -11,8 +10,11 @@ public class TerrainCreator : MonoBehaviour {
 	private static int _resolutionX;
     private static int _resolutionZ;
 	private static float[,] _heights;
+    private TerrainHeight _utils;
 
 	void Start() {
+        _utils = new TerrainHeight();
+        
 		_terrain = GetComponent<Terrain>();
 		_resolutionX = _terrain.terrainData.heightmapWidth;
         _resolutionZ = _terrain.terrainData.heightmapHeight;
@@ -21,14 +23,14 @@ public class TerrainCreator : MonoBehaviour {
         ResetHeight();
         ResetColor();
 
-        StartCoroutine(ChangeHeight());
+        //StartCoroutine(ChangeHeight());
 	}
 
 	void Update() {
         // ChangeHeight();
-        // if (scene.name == "Terrain 2") 
-            // UpdateHeatMap(); 
-	}
+        _heights = _utils.ChangeHeight(_heights, _resolutionX, _resolutionZ, (int)function);
+        _terrain.terrainData.SetHeights(0, 0, _heights);
+    }
 
 	private void ResetHeight() {
         for (int x = 0; x < _resolutionX; x++) {
@@ -38,6 +40,7 @@ public class TerrainCreator : MonoBehaviour {
         _terrain.terrainData.SetHeights(0, 0, _heights);
     }
 
+    /*
     public IEnumerator ChangeHeight() {
         float step = 1/(float)_resolutionX;
 
@@ -54,6 +57,7 @@ public class TerrainCreator : MonoBehaviour {
             yield return null;
         }
     }
+    */
 
     public IEnumerator UpdateHeatMap() {
         HideDirt();
