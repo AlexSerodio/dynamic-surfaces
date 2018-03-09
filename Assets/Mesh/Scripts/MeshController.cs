@@ -5,7 +5,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class MeshController : MonoBehaviour {
-
+	
 	public int resolution;
 	public int width;
 	public int length;
@@ -17,14 +17,16 @@ public class MeshController : MonoBehaviour {
 	public Gradient heatmap;
 
 	private Mesh _mesh;
-	private Vector3[] _vertices;
+	// private Vector3[] _vertices;
 	private Vector3[] _normals;
 	private Color[] _colors;
 	private MeshHeight _utils;
+	private Coroutine _changeHeight;
+	private bool _changed;
 
 	void Start () {
-		_utils = new MeshHeight();
-		
+		_utils = new MeshHeight(resolution);
+
 		if (_mesh == null) {
 			_mesh = new Mesh();
 			_mesh.name = "Surface Mesh";
@@ -32,36 +34,35 @@ public class MeshController : MonoBehaviour {
 		}
 		CreateGrid();
 		SetMaterial(dirt);
-		// ResetColor();
 	}
 
-	void Update() {
-		// ChangeHeight();
-		
-		_mesh.vertices = _utils.ChangeHeight(_vertices, resolution, (int)function);
-		if(recalculateNormals)
-			_mesh.RecalculateNormals();
+	void Update () {		
+		if (_changed) {
+			_mesh.vertices = _utils.vertices;
+			if(recalculateNormals)
+				_mesh.RecalculateNormals();
+		}
 	}
 
 	public void SetMaterial (Material newMaterial) {
 		GetComponent<MeshRenderer>().material = newMaterial;
+		_mesh.RecalculateNormals();
 	}
 
 	private void CreateGrid () {
 		_mesh.Clear();
-		_vertices = new Vector3[(resolution + 1) * (resolution + 1)];
-		_colors = new Color[_vertices.Length];
-		_normals = new Vector3[_vertices.Length];
-		Vector2[] uv = new Vector2[_vertices.Length];
+		_colors = new Color[_utils.vertices.Length];
+		_normals = new Vector3[_utils.vertices.Length];
+		Vector2[] uv = new Vector2[_utils.vertices.Length];
 		float stepSize = 1f / resolution;
 		for (int v = 0, z = 0; z <= resolution; z++) {
 			for (int x = 0; x <= resolution; x++, v++) {
-				_vertices[v] = new Vector3(x * stepSize - 0.5f, 0f, z * stepSize - 0.5f);
+				_utils.vertices[v] = new Vector3(x * stepSize - 0.5f, 0f, z * stepSize - 0.5f);
 				_normals[v] = Vector3.up;
 				uv[v] = new Vector2(x * stepSize, z * stepSize);
 			}
 		}
-		_mesh.vertices = _vertices;
+		_mesh.vertices = _utils.vertices;
 		_mesh.normals = _normals;
 		_mesh.uv = uv;
 
@@ -82,8 +83,48 @@ public class MeshController : MonoBehaviour {
 		transform.localPosition = new Vector3(0, 0, 4.65f);
 	}
 
+	public void StartChanges () {
+        _changed = true;
+        if (_changeHeight != null)
+            StopCoroutine(_changeHeight);
+        _changeHeight = StartCoroutine(_utils.ChangeHeight((int)function));
+    }
+
+    public void StopChanges () {
+        _changed = false;
+        if (_changeHeight != null)
+            StopCoroutine(_changeHeight);
+    }
+
+	public IEnumerator UpdateHeatMap () {
+		SetMaterial(heatmapMaterial);
+		while (true) {
+			for (int v = 0, y = 0; y <= resolution; y++) {
+				for (int x = 0; x <= resolution; x++, v++) {
+					_colors[v] = heatmap.Evaluate(_utils.vertices[v].y + .25f);
+				}
+			}
+			_mesh.colors = _colors;
+
+			yield return null;
+		}
+	}
+
+	public void ResetNormals () {
+		Vector3 zero = Vector3.up;
+		for (int v = 0, z = 0; z <= resolution; z++) {
+			for (int x = 0; x <= resolution; x++, v++) {
+				_normals[v] = zero;
+			}
+		}
+		_mesh.normals = _normals;
+	}
+
+
+	/* ----- OLD METHODS ----- */
+
 	/*
-	public void ChangeHeight() {
+	public void ChangeHeight () {
         float step = 1/(float)resolution;
         for (int v = 0, y = 0; y <= resolution; y++) {
 			for (int x = 0; x <= resolution; x++, v++) {
@@ -97,34 +138,21 @@ public class MeshController : MonoBehaviour {
 		if(recalculateNormals)
 			_mesh.RecalculateNormals();
     }
-	*/
-
-	public IEnumerator UpdateHeatMap() {
-		SetMaterial(heatmapMaterial);
-		while (true) {
-			for (int v = 0, y = 0; y <= resolution; y++) {
-				for (int x = 0; x <= resolution; x++, v++) {
-					_colors[v] = heatmap.Evaluate(_vertices[v].y + .25f);
-				}
-			}
-			_mesh.colors = _colors;
-
-			yield return null;
-		}
-	}
-	
+ 	*/
 
 	/*
-	public IEnumerator UpdateHeatMap() {
-		SetMaterial(heatmapMaterial);
-		while (true) {
-			_mesh.colors = _utils.UpdateHeatMap(_vertices, resolution, heatmap);
-			yield return null;
-		}
+	public void ChangeHeight2 () {
+		int i = 0;
+        while (i < _vertices.Length) {
+            _vertices[i] += _normals[i] * Mathf.Sin(Time.time);
+            i++;
+        }
+        _mesh.vertices = _vertices;
 	}
 	*/
 
-	public void ResetColor() {
+	/*
+	public void ResetColor () {
 		for (int v = 0, y = 0; y <= resolution; y++) {
 			for (int x = 0; x <= resolution; x++, v++) {
 				_colors[v] = Color.green;
@@ -132,15 +160,5 @@ public class MeshController : MonoBehaviour {
 		}
 		_mesh.colors = _colors;
 	}
-
-	public void ResetNormals() {
-		Vector3 zero = Vector3.up;
-		for (int v = 0, z = 0; z <= resolution; z++) {
-			for (int x = 0; x <= resolution; x++, v++) {
-				_normals[v] = zero;
-			}
-		}
-		_mesh.normals = _normals;
-	}
-
+	*/
 }

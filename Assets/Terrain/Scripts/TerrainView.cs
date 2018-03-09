@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class TerrainView : MonoBehaviour {
 
-	public TerrainCreator terrainCreator;
+	public TerrainController terrainController;
     public GameObject containerPanel;
     private bool _terrainMapButton;
+    private bool _sineFunctionButton;
+    private bool _sineFunction2Button;
     private Coroutine _terrainMapCoroutine;
 
 	public void LoadScene(int index) {
@@ -17,19 +19,33 @@ public class TerrainView : MonoBehaviour {
         _terrainMapButton = !_terrainMapButton;
 
         if(_terrainMapButton) {
-            _terrainMapCoroutine = StartCoroutine(terrainCreator.UpdateHeatMap());
+            _terrainMapCoroutine = StartCoroutine(terrainController.UpdateHeatMap());
         } else {
             StopCoroutine(_terrainMapCoroutine);
-            terrainCreator.ResetColor();
+            terrainController.ResetColor();
         }
     }
 
     public void ActivateSineFunction() {
-        terrainCreator.function = FunctionOption.Sine;
+        _sineFunctionButton = !_sineFunctionButton;
+        _sineFunction2Button = false;
+        if (_sineFunctionButton) {
+            terrainController.function = FunctionOption.Sine;
+            terrainController.StartChanges();
+        } else {
+            terrainController.StopChanges();
+        }            
     }
 
     public void ActivateComplexSineFunction() {
-        terrainCreator.function = FunctionOption.ComplexSine;
+        _sineFunction2Button = !_sineFunction2Button;
+        _sineFunctionButton = false;
+        if (_sineFunction2Button) {
+            terrainController.function = FunctionOption.ComplexSine;
+            terrainController.StartChanges();
+        } else {
+            terrainController.StopChanges();
+        }
     }
 
     public void HideButton() {

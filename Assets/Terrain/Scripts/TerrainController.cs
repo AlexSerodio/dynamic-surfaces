@@ -2,7 +2,7 @@
 using UnityEngine;
 using TerrainUtilsDLL;
 
-public class TerrainCreator : MonoBehaviour {
+public class TerrainController : MonoBehaviour {
 
     public FunctionOption function;
 
@@ -11,28 +11,46 @@ public class TerrainCreator : MonoBehaviour {
     private static int _resolutionZ;
 	private static float[,] _heights;
     private TerrainHeight _utils;
+    private Coroutine _changeHeight;
+    private bool _changed = false;
 
-	void Start() {
-        _utils = new TerrainHeight();
-        
+	void Start () {        
 		_terrain = GetComponent<Terrain>();
 		_resolutionX = _terrain.terrainData.heightmapWidth;
         _resolutionZ = _terrain.terrainData.heightmapHeight;
 		_heights = _terrain.terrainData.GetHeights(0, 0, _resolutionX, _resolutionZ);
 
+        _utils = new TerrainHeight(_resolutionX, _resolutionZ);
+
         ResetHeight();
         ResetColor();
 
-        //StartCoroutine(ChangeHeight());
+        // StartCoroutine(_utils.ChangeHeight((int)function));
+        // StartCoroutine(ChangeHeight());
 	}
 
-	void Update() {
+	void Update () {
         // ChangeHeight();
-        _heights = _utils.ChangeHeight(_heights, _resolutionX, _resolutionZ, (int)function);
-        _terrain.terrainData.SetHeights(0, 0, _heights);
+        // _heights = _utils.ChangeHeight(_heights, _resolutionX, _resolutionZ, (int)function);
+        // _terrain.terrainData.SetHeights(0, 0, _heights);
+        if (_changed)
+            _terrain.terrainData.SetHeights(0, 0, _utils.heights);
     }
 
-	private void ResetHeight() {
+    public void StartChanges () {
+        _changed = true;
+        if (_changeHeight != null)
+            StopCoroutine(_changeHeight);
+        _changeHeight = StartCoroutine(_utils.ChangeHeight((int)function));
+    }
+
+    public void StopChanges () {
+        _changed = false;
+        if (_changeHeight != null)
+            StopCoroutine(_changeHeight);
+    }
+
+	private void ResetHeight () {
         for (int x = 0; x < _resolutionX; x++) {
             for (int z = 0; z < _resolutionZ; z++)
                 _heights[x, z] = .5f;
@@ -59,14 +77,14 @@ public class TerrainCreator : MonoBehaviour {
     }
     */
 
-    public IEnumerator UpdateHeatMap() {
+    public IEnumerator UpdateHeatMap () {
         HideDirt();
         float[, ,] alphaMap = _terrain.terrainData.GetAlphamaps(0, 0, _terrain.terrainData.alphamapWidth, _terrain.terrainData.alphamapHeight);
         while(true) {
             for (int x = 0; x < _resolutionX-1; x++) {
                 for (int y = 0; y < _resolutionZ-1; y++) {
-                    alphaMap[x, y, 0] = 1.0f - _heights[x, y];
-                    alphaMap[x, y, 1] = _heights[x, y];
+                    alphaMap[x, y, 0] = 1.0f - _utils.heights[x, y];
+                    alphaMap[x, y, 1] = _utils.heights[x, y];
                 }
             }
             _terrain.terrainData.SetAlphamaps(0, 0, alphaMap); 

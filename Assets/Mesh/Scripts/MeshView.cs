@@ -2,9 +2,11 @@
 
 public class MeshView : MonoBehaviour {
 
-	public MeshController meshCreator;
+	public MeshController meshController;
     public GameObject containerPanel;
 	private bool _meshMapButton;
+    private bool _sineFunctionButton;
+    private bool _sineFunction2Button;
 	private Coroutine _meshMapCoroutine;
 
 	public void LoadScene(int index) {
@@ -15,20 +17,33 @@ public class MeshView : MonoBehaviour {
         _meshMapButton = !_meshMapButton;
 
         if(_meshMapButton) {
-            _meshMapCoroutine = StartCoroutine(meshCreator.UpdateHeatMap());
+            _meshMapCoroutine = StartCoroutine(meshController.UpdateHeatMap());
         } else {
             StopCoroutine(_meshMapCoroutine);
-            // meshCreator.ResetColor();
-            meshCreator.SetMaterial(meshCreator.dirt);
+            meshController.SetMaterial(meshController.dirt);
         }
     }
 
     public void ActivateSineFunction() {
-        meshCreator.function = FunctionOption.Sine;
+        _sineFunctionButton = !_sineFunctionButton;
+        _sineFunction2Button = false;
+        if (_sineFunctionButton) {
+            meshController.function = FunctionOption.Sine;
+            meshController.StartChanges();
+        } else {
+            meshController.StopChanges();
+        }    
     }
 
     public void ActivateComplexSineFunction() {
-        meshCreator.function = FunctionOption.ComplexSine;
+        _sineFunction2Button = !_sineFunction2Button;
+        _sineFunctionButton = false;
+        if (_sineFunction2Button) {
+            meshController.function = FunctionOption.ComplexSine;
+            meshController.StartChanges();
+        } else {
+            meshController.StopChanges();
+        }
     }
 
     public void HideButton() {
@@ -39,7 +54,7 @@ public class MeshView : MonoBehaviour {
     }
 
     public void ActivateNormalsRecalculation() {
-        meshCreator.recalculateNormals = !meshCreator.recalculateNormals;
-        meshCreator.ResetNormals();
+        meshController.recalculateNormals = !meshController.recalculateNormals;
+        meshController.ResetNormals();
     }
 }
