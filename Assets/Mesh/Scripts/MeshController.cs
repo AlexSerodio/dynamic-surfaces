@@ -15,9 +15,9 @@ public class MeshController : MonoBehaviour {
 	public Material dirt;
 	public Material heatmapMaterial;
 	public Gradient heatmap;
+	public bool canCollide = false;
 
 	private Mesh _mesh;
-	// private Vector3[] _vertices;
 	private Vector3[] _normals;
 	private Color[] _colors;
 	private MeshHeight _utils;
@@ -36,9 +36,11 @@ public class MeshController : MonoBehaviour {
 		SetMaterial(dirt);
 	}
 
-	void Update () {		
+	void Update () {
 		if (_changed) {
 			_mesh.vertices = _utils.vertices;
+			if (canCollide)
+				GetComponent<MeshCollider>().sharedMesh = _mesh;
 			if(recalculateNormals)
 				_mesh.RecalculateNormals();
 		}
@@ -119,46 +121,4 @@ public class MeshController : MonoBehaviour {
 		}
 		_mesh.normals = _normals;
 	}
-
-
-	/* ----- OLD METHODS ----- */
-
-	/*
-	public void ChangeHeight () {
-        float step = 1/(float)resolution;
-        for (int v = 0, y = 0; y <= resolution; y++) {
-			for (int x = 0; x <= resolution; x++, v++) {
-				if(function == 0)
-                	_vertices[v].y = MathFunctions.Sine(x * step);
-				else
-					_vertices[v].y = .25f + MathFunctions.Sine(x*step, y*step);
-			}
-        }
-		_mesh.vertices = _vertices;
-		if(recalculateNormals)
-			_mesh.RecalculateNormals();
-    }
- 	*/
-
-	/*
-	public void ChangeHeight2 () {
-		int i = 0;
-        while (i < _vertices.Length) {
-            _vertices[i] += _normals[i] * Mathf.Sin(Time.time);
-            i++;
-        }
-        _mesh.vertices = _vertices;
-	}
-	*/
-
-	/*
-	public void ResetColor () {
-		for (int v = 0, y = 0; y <= resolution; y++) {
-			for (int x = 0; x <= resolution; x++, v++) {
-				_colors[v] = Color.green;
-			}
-		}
-		_mesh.colors = _colors;
-	}
-	*/
 }

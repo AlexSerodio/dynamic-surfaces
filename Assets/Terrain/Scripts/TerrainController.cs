@@ -24,15 +24,9 @@ public class TerrainController : MonoBehaviour {
 
         ResetHeight();
         ResetColor();
-
-        // StartCoroutine(_utils.ChangeHeight((int)function));
-        // StartCoroutine(ChangeHeight());
 	}
 
 	void Update () {
-        // ChangeHeight();
-        // _heights = _utils.ChangeHeight(_heights, _resolutionX, _resolutionZ, (int)function);
-        // _terrain.terrainData.SetHeights(0, 0, _heights);
         if (_changed)
             _terrain.terrainData.SetHeights(0, 0, _utils.heights);
     }
@@ -57,26 +51,7 @@ public class TerrainController : MonoBehaviour {
         }
         _terrain.terrainData.SetHeights(0, 0, _heights);
     }
-
-    /*
-    public IEnumerator ChangeHeight() {
-        float step = 1/(float)_resolutionX;
-
-        while (true) {
-            for (int x = 0; x < _resolutionX; x++) {
-                for (int z = 0; z < _resolutionZ; z++) {
-                    if(function == 0)
-                        _heights[x,z] = MathFunctions.Sine(x*step);
-                    else
-                        _heights[x,z] = 0.5f + MathFunctions.Sine(x*step, z*step);
-                }
-            }
-            _terrain.terrainData.SetHeights(0, 0, _heights);
-            yield return null;
-        }
-    }
-    */
-
+    
     public IEnumerator UpdateHeatMap () {
         HideDirt();
         float[, ,] alphaMap = _terrain.terrainData.GetAlphamaps(0, 0, _terrain.terrainData.alphamapWidth, _terrain.terrainData.alphamapHeight);
