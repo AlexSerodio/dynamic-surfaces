@@ -1185,13 +1185,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 780934932}
-  m_LocalRotation: {x: 0.20251347, y: 0.65166867, z: -0.1867399, w: 0.70671386}
-  m_LocalPosition: {x: -38.3, y: 41.99, z: 22.7}
+  m_LocalRotation: {x: 0.20655505, y: 0.67626554, z: -0.20655505, w: 0.67626554}
+  m_LocalPosition: {x: -28.4, y: 44.2, z: 24.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 31.98, y: 85.359, z: 0}
+  m_LocalEulerAnglesHint: {x: 33.969, y: 90, z: 0}
 --- !u!1 &1154605762
 GameObject:
   m_ObjectHideFlags: 0
@@ -1874,6 +1874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1860825893777824, guid: ba7755e05bbc2a548b5fe36628656162, type: 2}
+  meshController: {fileID: 0}
 --- !u!4 &1992830805
 Transform:
   m_ObjectHideFlags: 0
@@ -2085,7 +2086,7 @@ Terrain:
   m_DrawHeightmap: 1
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 0
-  m_MaterialType: 0
+  m_MaterialType: 3
   m_LegacySpecular:
     serializedVersion: 2
     rgba: 4286545791
