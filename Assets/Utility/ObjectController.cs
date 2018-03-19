@@ -4,14 +4,25 @@ using UnityEngine;
 
 public class ObjectController : MonoBehaviour {
 
+	// private float positionX;
+	// private float positionZ;
+	// private Quaternion rotation;
+
 	// Use this for initialization
 	void Start () {
-		StartCoroutine(lifeTime(3));
+		// positionX = transform.position.x;
+		// positionZ = transform.position.z;
+		// rotation = transform.rotation;
+		// StartCoroutine(lifeTime(5));
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	/// <summary>
+	/// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
+	/// </summary>
+	void FixedUpdate()
+	{
+		// transform.position = new Vector3(positionX, transform.position.y, positionZ);
+		// transform.rotation = rotation;
 	}
 
 	private IEnumerator lifeTime (float time) {
