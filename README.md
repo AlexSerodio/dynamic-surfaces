@@ -1,5 +1,5 @@
 # Dynamic Surfaces - Performance Test
-Unity project that tests the performance of two different surface components.
+An Unity project made to compare the performance of two different surface components provided by Unity, the [Terrain Component](https://docs.unity3d.com/Manual/script-Terrain.html) and the [Mesh Component](https://docs.unity3d.com/ScriptReference/Mesh.html).
 
 ## Getting Started
 To run the project you must have [Unity 3D](https://unity3d.com/) installed. This project was developed with Unity 2017.3.0 so it might not work for older versions.
@@ -12,4 +12,4 @@ Here are some images showing the results achieved until now (using both static a
 
 ![prints](https://user-images.githubusercontent.com/23726229/35636641-f754a544-0698-11e8-9fae-e51cb311062f.jpg)
 
-The images can't demonstrate the changes that occur in the frame rate during execution. So for more accurate results, you can download the project and run it to see the changes at runtime.
+The images can't demonstrate the changes that occur in the frame rate during execution. So for more accurate results, you can download the project and run it to see the changes yourself.
