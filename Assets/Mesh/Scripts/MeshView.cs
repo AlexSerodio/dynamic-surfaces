@@ -6,7 +6,7 @@ public class MeshView : MonoBehaviour {
     public GameObject containerPanel;
 	private bool _meshMapButton;
     private bool _sineFunctionButton;
-    private bool _sineFunction2Button;
+    private bool _complexSineFunctionButton;
 	private Coroutine _meshMapCoroutine;
 
 	public void LoadScene(int index) {
@@ -26,7 +26,7 @@ public class MeshView : MonoBehaviour {
 
     public void ActivateSineFunction() {
         _sineFunctionButton = !_sineFunctionButton;
-        _sineFunction2Button = false;
+        _complexSineFunctionButton = false;
         if (_sineFunctionButton) {
             meshController.function = FunctionOption.Sine;
             meshController.StartChanges();
@@ -36,9 +36,9 @@ public class MeshView : MonoBehaviour {
     }
 
     public void ActivateComplexSineFunction() {
-        _sineFunction2Button = !_sineFunction2Button;
+        _complexSineFunctionButton = !_complexSineFunctionButton;
         _sineFunctionButton = false;
-        if (_sineFunction2Button) {
+        if (_complexSineFunctionButton) {
             meshController.function = FunctionOption.ComplexSine;
             meshController.StartChanges();
         } else {

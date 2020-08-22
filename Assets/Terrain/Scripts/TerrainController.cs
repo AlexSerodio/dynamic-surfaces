@@ -1,6 +1,6 @@
 ﻿using System.Collections;
-using UnityEngine;
 using TerrainUtilsDLL;
+using UnityEngine;
 
 public class TerrainController : MonoBehaviour {
 
@@ -16,8 +16,8 @@ public class TerrainController : MonoBehaviour {
 
 	void Start () {        
 		_terrain = GetComponent<Terrain>();
-		_resolutionX = _terrain.terrainData.heightmapWidth;
-        _resolutionZ = _terrain.terrainData.heightmapHeight;
+		_resolutionX = _terrain.terrainData.heightmapResolution;
+        _resolutionZ = _terrain.terrainData.heightmapResolution;
 		_heights = _terrain.terrainData.GetHeights(0, 0, _resolutionX, _resolutionZ);
 
         _utils = new TerrainHeight(_resolutionX, _resolutionZ);
